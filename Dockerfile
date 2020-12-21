@@ -19,6 +19,9 @@ WORKDIR /application
 
 RUN pip install -r requirements.txt
 
+# Expose ports
+EXPOSE 5000
+
 ENTRYPOINT [ "python3" ]
 
 CMD [ "app.py" ]
