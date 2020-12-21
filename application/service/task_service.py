@@ -1,4 +1,4 @@
-from application.model.models import YouTodooTask, db
+from application.model import YouTodooTask, db
 
 
 def find_all_tasks() -> list:

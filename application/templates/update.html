@@ -11,15 +11,15 @@
     <h1 style="text-align: center">Update TODOer Task</h1>
 
     <div class="task-form">
-        <form action="/" method="POST">
+        <form action="/update/{{task.id}}" method="POST">
             <label for="content" class="input-text">
-                <input type="text" id="content" name="content" placeholder="Play bass"
+                <input type="text" id="content" name="content" placeholder="Play bass" value="{{task.content}}"
                        minlength="1" pattern=".{1,}" required title="1 character minimum">
                 <span class="label"></span>
                 <span class="focus-bg"></span>
             </label>
 
-            <button class="button">Add Task</button>
+            <button class="button">Update Task</button>
         </form>
     </div>
 
