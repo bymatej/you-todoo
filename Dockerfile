@@ -17,7 +17,7 @@ COPY ./application /application/
 
 WORKDIR /application
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 # Expose ports
 EXPOSE 5000
