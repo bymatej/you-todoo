@@ -6,8 +6,7 @@ More information:
 - This project was used as a playground to learn more about Flask.
 - Original Git Repo: https://github.com/jakerieger/FlaskIntroduction
 
-
 # Todo
 - update readme
-- optimize imports (`__init.py__` file)
+- optimize imports (using `__init__.py`)
 - write run command
