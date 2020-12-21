@@ -1,8 +1,8 @@
 from application.model.models import YouTodooTask, db
 
 
-def find_all_tasks():
-    YouTodooTask.query.order_by(YouTodooTask.date_created).all()
+def find_all_tasks() -> list:
+    return YouTodooTask.query.order_by(YouTodooTask.date_created).all()
 
 
 def find_task_by_id(ytdtask_id: int) -> YouTodooTask:
