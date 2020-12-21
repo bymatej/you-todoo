@@ -13,11 +13,11 @@ RUN echo "***** Updating and installing required software and tools" && \
                    python3-dev
 
 # Copy the application and install requirements.txt first to leverage Docker cache
-COPY ./application /application/
+COPY ./application /you-todoo/application/
 
-WORKDIR /application
+WORKDIR /you-todoo
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r /you-todoo/requirements.txt
 
 # Expose ports
 EXPOSE 5000
