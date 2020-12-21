@@ -1,17 +1,19 @@
 from datetime import datetime
 
-from __main__ import app
 from flask_sqlalchemy import SQLAlchemy
+
+from application.app import app
 
 db = SQLAlchemy(app)
 
-
-# with app.test_request_context():
-#     db.init_app(app)
-#     db.create_all()
+with app.app_context():
+    db.init_app(app)
+    db.create_all()
 
 
 class YouTodooTask(db.Model):
+    # __tablename__ = "you_todoo_tasks"
+
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
     completed = db.Column(db.Integer, default=0)
