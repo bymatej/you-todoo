@@ -2,13 +2,7 @@ from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy
 
-from application.app import app
-
-db = SQLAlchemy(app)
-
-with app.app_context():
-    db.init_app(app)
-    db.create_all()
+db = SQLAlchemy()
 
 
 class YouTodooTask(db.Model):

@@ -1,15 +1,9 @@
-# Import Flask
-from flask import Flask
-
-# Configure project
-from application.config.config import Config
-
-app = Flask(__name__)
-app.config.from_object(Config())
-
-# this is not at the top of the file intentionally, as app needs to be created prior to the DB, and DB needs app
-import application.controller.task_controller
+from application.controller.task_controller import app
+from application.model.models import db
 
 # Run point
 if __name__ == "__main__":
+    with app.app_context():
+        db.init_app(app)
+        db.create_all()
     app.run(debug=True)
