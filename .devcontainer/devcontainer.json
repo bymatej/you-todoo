@@ -1,0 +1,28 @@
+{
+  "name": "external-you-todoo",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "USERNAME": "${localEnv:USER}",
+      "USER_UID": "${localEnv:UID}",
+      "USER_GID": "${localEnv:GID}",
+      "DOCKER_GID": "${localEnv:DOCKER_GID}"
+    }
+  },
+  "workspaceFolder": "/workspace/you-todoo",
+  "remoteUser": "${localEnv:USER}",
+  //"remoteUser": "root",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "runArgs": [
+    "--group-add",
+    "${localEnv:DOCKER_GID}"
+  ],
+  "customizations": {
+    "jetbrains": {
+      "backend": "PyCharm"
+    }
+  }
+}
