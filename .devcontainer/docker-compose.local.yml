@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  workspace:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        USERNAME: ${USER:-dev}
+        USER_UID: ${UID:-1000}
+        USER_GID: ${GID:-1000}
+    environment:
+      DOCKER_HOST: tcp://docker:2375
+      DOCKER_BUILDKIT: "1"
+    depends_on:
+      - docker
+    volumes:
+      - ..:/workspace/you-todoo
+    working_dir: /workspace/you-todoo
+    command: sleep infinity
+
+  docker:
+    image: docker:27-dind
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command: ["dockerd", "--host=tcp://0.0.0.0:2375"]
+    volumes:
+      - you-todoo-local-dind:/var/lib/docker
+    ports:
+      - "5000:5000"
+
+volumes:
+  you-todoo-local-dind:

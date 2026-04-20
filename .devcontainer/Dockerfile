@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     ca-certificates \
     gnupg \
+    sudo \
  && rm -rf /var/lib/apt/lists/*
 
 # Docker CLI + Compose plugin
@@ -43,11 +44,16 @@ RUN if ! getent group "${USER_GID}" >/dev/null; then \
     fi \
  && if ! id -u "${USERNAME}" >/dev/null 2>&1; then \
       useradd --uid "${USER_UID}" --gid "${USER_GID}" -ms /bin/bash "${USERNAME}"; \
-    fi
+    fi \
+ && echo "${USERNAME} ALL=(root) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}" \
+ && chmod 0440 "/etc/sudoers.d/${USERNAME}"
 
 # Install agent CLIs globally
 RUN npm install -g @openai/codex @anthropic-ai/claude-code \
  && npm cache clean --force
+
+RUN mkdir -p /workspace/you-todoo \
+ && chown -R "${USER_UID}:${USER_GID}" /workspace
 
 WORKDIR /workspace/you-todoo
 
